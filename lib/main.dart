@@ -1,15 +1,18 @@
 import "dart:io";
 import "package:flutter/material.dart";
 import "package:path_provider/path_provider.dart";
-import "appointmnets/Appointments.dart";
-import "contacts/Contacts.dart";
-import "notes/Notes.dart";
-import "tasks/Tasks.dart";
-import "utils.dart" as utils;
+// import "appointmnets/Appointments.dart";
+// import "contacts/Contacts.dart";
+// import "notes/Notes.dart";
+// import "tasks/Tasks.dart";
+// import "utils.dart" as utils;
 
 void main() {
+  
+  WidgetsFlutterBinding.ensureInitialized();
   startMeUp() async {
     Directory docsDir = await getApplicationDocumentsDirectory();
+    runApp(FlutterBook());
   }
 
   startMeUp();
@@ -34,7 +37,7 @@ class FlutterBook extends StatelessWidget {
                ),
            ),
            body: TabBarView(children: [
-             
+             Text("h"),Text("h"),Text("h"),Text("h")
            ],),
            ),
          ),
