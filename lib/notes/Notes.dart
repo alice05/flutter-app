@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'NotesDBWorker.dart';
-import 'NotesList.dart';
+import 'NoteList.dart';
 import 'NotesEntry.dart';
 import 'NotesModel.dart' show NotesModel, notesModel;
 
@@ -34,7 +34,7 @@ class Notes extends StatelessWidget {
             return IndexedStack(
               index: inModel.stackIndex,
               children: [
-                NotesList(),
+                NoteList(),
                 NotesEntry()
               ]
               );

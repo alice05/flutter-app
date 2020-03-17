@@ -81,59 +81,49 @@ class NoteList extends StatelessWidget {
                                   notesModel.setColor(
                                       notesModel.entityBeingEdited.color);
                                   notesModel.setStackIndex(1);
-                                })
-                                )
-                                ),
+                                }))),
                   );
                 }),
           );
         }));
   }
 
-
-    /// Show a dialog requesting delete confirmation.
+  /// Show a dialog requesting delete confirmation.
   ///
   /// @param  inContext The BuildContext of the parent Widget.
   /// @param  inNote    The note (potentially) being deleted.
   /// @return           Future.
   Future _deleteNote(BuildContext inContext, Note inNote) async {
-
     print("## NotestList._deleteNote(): inNote = $inNote");
 
     return showDialog(
-      context : inContext,
-      barrierDismissible : false,
-      builder : (BuildContext inAlertContext) {
-        return AlertDialog(
-          title : Text("Delete Note"),
-          content : Text("Are you sure you want to delete ${inNote.title}?"),
-          actions : [
-            FlatButton(child : Text("Cancel"),
-              onPressed: () {
-                // Just hide dialog.
-                Navigator.of(inAlertContext).pop();
-              }
-            ),
-            FlatButton(child : Text("Delete"),
-              onPressed : () async {
-                // Delete from database, then hide dialog, show SnackBar, then re-load data for the list.
-                await NotesDBWorker.db.delete(inNote.id);
-                Navigator.of(inAlertContext).pop();
-                Scaffold.of(inContext).showSnackBar(
-                  SnackBar(
-                    backgroundColor : Colors.red,
-                    duration : Duration(seconds : 2),
-                    content : Text("Note deleted")
-                  )
-                );
-                // Reload data from database to update list.
-                notesModel.loadData("notes", NotesDBWorker.db);
-              }
-            )
-          ]
-        );
-      }
-    );
-
+        context: inContext,
+        barrierDismissible: false,
+        builder: (BuildContext inAlertContext) {
+          return AlertDialog(
+              title: Text("Delete Note"),
+              content: Text("Are you sure you want to delete ${inNote.title}?"),
+              actions: [
+                FlatButton(
+                    child: Text("Cancel"),
+                    onPressed: () {
+                      // Just hide dialog.
+                      Navigator.of(inAlertContext).pop();
+                    }),
+                FlatButton(
+                    child: Text("Delete"),
+                    onPressed: () async {
+                      // Delete from database, then hide dialog, show SnackBar, then re-load data for the list.
+                      await NotesDBWorker.db.delete(inNote.id);
+                      Navigator.of(inAlertContext).pop();
+                      Scaffold.of(inContext).showSnackBar(SnackBar(
+                          backgroundColor: Colors.red,
+                          duration: Duration(seconds: 2),
+                          content: Text("Note deleted")));
+                      // Reload data from database to update list.
+                      notesModel.loadData("notes", NotesDBWorker.db);
+                    })
+              ]);
+        });
   } /* End _deleteNote(). */
 }
